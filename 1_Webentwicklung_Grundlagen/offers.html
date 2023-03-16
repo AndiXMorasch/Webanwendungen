@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyTours - Angebote</title>
+    <link href="./CSS/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="bs-component">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="./index.html">
+                    <img src="./IMG/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    MyTours
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./ideas.html">Ideen</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./offers.html">Angebote</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./about.html">Impressum</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search" placeholder="Suchen">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Suchen</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <img src="./IMG/travel-stock-image.jpg" class="img-fluid" alt="travel image">
+
+    <div class="row">
+        <div class="page-header">
+            <h1 id="typography">Reise anlegen</h1>
+        </div>
+    </div>
+
+    <form id="trip-creation-form" name="trip-creation-form">
+        <div class="row">
+            <div class="col">
+                <label for="input-trip-id">Kürzel</label>
+                <input type="text" name="tripid" class="form-control" id="input-trip-id" placeholder="Kürzel"
+                    maxlength="6">
+                <div class="valid-feedback">Das Kürzel existiert bereits.</div>
+            </div>
+            <div class="col">
+                <label for="select-number-of-travelers">Anzahl der Reisenden</label>
+                <input type="number" class="form-control" id="select-number-of-travelers" min="1" max="10" value="1"
+                    step="1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="input-trip-destination">Reiseziel</label>
+                <input type="text" class="form-control" id="input-trip-destination" placeholder="Reiseziel"
+                    name="destination" maxlength="50">
+            </div>
+            <div class="col">
+                <label for="input-trip-price">Preis:</label>
+                <div class="input-group mb-3" id="input-trip-price">
+                    <span class="input-group-text">€</span>
+                    <input id="trip-price" type="number" class="form-control" placeholder="Preis" name="trip_price"
+                        min="1" step="1">
+                    <span class="input-group-text">,00</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="trip-start-date">Reisebeginn</label>
+                <input class="form-control" type="date" id="trip-start-date" name="trip-start">
+            </div>
+            <div class="col">
+                <label for="trip-end-date">Reiseende</label>
+                <input class="form-control" type="date" id="trip-end-date" name="trip-end">
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Reise
+                    anlegen</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="page-header">
+            <h1 id="typography">Unsere Reiseangebote</h1>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped" id="trip-table">
+            <thead>
+                <tr>
+                    <th scope="col">Kürzel</th>
+                    <th scope="col">Anz. Reisende</th>
+                    <th scope="col">Reiseziel</th>
+                    <th scope="col">Reisebeginn am:</th>
+                    <th scope="col">Rückreise am:</th>
+                    <th scope="col">Tage gesamt</th>
+                    <th scope="col">Gesamtpreis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">USLA</th>
+                    <td>3</td>
+                    <td>Los Angeles (USA)</td>
+                    <td>27.08.2023</td>
+                    <td>05.09.2023</td>
+                    <td>9</td>
+                    <td>2750,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">ITPA</th>
+                    <td>2</td>
+                    <td>Parma (Italien)</td>
+                    <td>21.05.2023</td>
+                    <td>30.05.2023</td>
+                    <td>8</td>
+                    <td>1570,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">CHPE</th>
+                    <td>2</td>
+                    <td>Peking (China)</td>
+                    <td>10.06.2023</td>
+                    <td>24.06.2023</td>
+                    <td>13</td>
+                    <td>2475,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">SAKP</th>
+                    <td>1</td>
+                    <td>Kapstadt (Südafrika)</td>
+                    <td>20.06.2023</td>
+                    <td>05.07.2023</td>
+                    <td>14</td>
+                    <td>2275,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">BRRI</th>
+                    <td>3</td>
+                    <td>Rio de Janeiro (Brasilien)</td>
+                    <td>29.07.2023</td>
+                    <td>11.08.2023</td>
+                    <td>12</td>
+                    <td>4150,00€</td>
+                </tr>
+                <tr>
+                    <th scope="row">CR13</th>
+                    <td>2</td>
+                    <td>Mittelmeer, Ärmelkanal, Nordsee</td>
+                    <td>26.05.2023</td>
+                    <td>01.06.2023</td>
+                    <td>5</td>
+                    <td>1200,00€</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="./ideas.html" class="nav-link px-2 text-muted">Ideen</a></li>
+            <li class="nav-item"><a href="./offers.html" class="nav-link px-2 text-muted">Preise</a></li>
+            <li class="nav-item"><a href="./about.html" class="nav-link px-2 text-muted">Impressum</a></li>
+        </ul>
+        <p class="text-center text-muted">© 2023 MyTours AG</p>
+    </footer>
+
+    <script src="./JS/bootstrap.bundle.min.js"></script>
+    <script src="./JS/jquery.min.js"></script>
+    <script src="./JS/jquery.validate.min.js"></script>
+    <script src="./JS/trip-creation.js"></script>
+</body>
+
+</html>
