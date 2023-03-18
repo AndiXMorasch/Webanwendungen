@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MyTours - Startseite</title>
     <link href="./CSS/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="./CSS/aenderungen.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -27,9 +28,6 @@
                             <a class="nav-link active" href="./index.html">Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./ideas.html">Ideen</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./offers.html">Angebote</a>
@@ -94,23 +92,30 @@
     <div class="row">
         <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Reiseideen</h5>
-                    <p class="card-text">Sie wissen nicht wohin Sie reisen sollen? Hier geht's zu unseren
-                        Reiseideen.</p>
-                    <a href="./ideas.html" class="btn btn-primary">Mehr erfahren</a>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Angebote</h5>
+                        <p class="card-text">Sie möchten mehr über unsere Angebote und Preise erfahren? Hier entlang.
+                        </p>
+                        <a href="./offers.html" class="btn btn-primary">Mehr erfahren</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Angebote</h5>
-                    <p class="card-text">Sie möchten mehr über unsere Angebote und Preise erfahren? Hier entlang.</p>
-                    <a href="./offers.html" class="btn btn-primary">Mehr erfahren</a>
+                    <h5 class="card-title">Impressum</h5>
+                    <p class="card-text">Sie möchten mehr Details über unser Unternehmen erfahren?</p>
+                    <a href="./about.html" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        data-bs-title="Tooltip on bottom">Mehr erfahren</a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="row" style="margin-top: 2rem;">
+        <h4>Angebot des Tages</h4>
     </div>
 
     <div class="row" style="margin-top: 1rem;">
@@ -120,7 +125,7 @@
                     <img src="./IMG/cruise.jpg" class="card-img-top" alt="Photo of a cruise ship">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Angebot des Tages</h5>
+                    <h5 class="card-title">MSC Splendida Kreuzfahrt</h5>
                     <p class="card-text">Das Angebot des Tages ist eine Kreuzfahrt vom Mittelmeer über den Ärmelkanal
                         zur Nordsee. Die Reise dauert 5 Tage und kostet für 2 Personen nur 1200,00€.</p>
                     <p class="card-text"><small class="text-muted">Gültigkeit: 13 Stunden</small></p>
@@ -129,10 +134,16 @@
         </div>
     </div>
 
+    <div class="row">
+        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+            data-bs-title="Tooltip on bottom">
+            Tooltip on bottom
+        </button>
+    </div>
+
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
             <li class="nav-item"><a href="./index.html" class="nav-link px-2 text-muted">Home</a></li>
-            <li class="nav-item"><a href="./ideas.html" class="nav-link px-2 text-muted">Ideen</a></li>
             <li class="nav-item"><a href="./offers.html" class="nav-link px-2 text-muted">Preise</a></li>
             <li class="nav-item"><a href="./about.html" class="nav-link px-2 text-muted">Impressum</a></li>
         </ul>

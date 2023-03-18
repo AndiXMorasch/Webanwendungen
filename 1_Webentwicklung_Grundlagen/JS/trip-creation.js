@@ -12,6 +12,13 @@ function initDates() {
     document.getElementById('trip-end-date').valueAsDate = date;
 }
 
+// Show toast when creating entry
+function showToast() {
+    const toastLiveExample = document.getElementById('liveToast')
+    const toast = new bootstrap.Toast(toastLiveExample)
+    toast.show();
+}
+
 // https://www.sitepoint.com/basic-jquery-form-validation-tutorial/
 $().ready(function () {
     $("form[name='trip-creation-form']").validate({
@@ -24,6 +31,7 @@ $().ready(function () {
             submitEntry();
             document.getElementById("trip-creation-form").reset();
             initDates();
+            showToast();
         }
     });
 });
@@ -63,7 +71,7 @@ function submitEntry() {
 
     cell6.innerHTML = daysBetween(difference);
     cell7.innerHTML = document.getElementById("trip-price").value + ",00€";
-    event.preventDefault();
+    event.preventDefault(); // TODO: preventDefault, gibt es eine Alternative?
 }
 
 // https://dev.to/dailydevtips1/vanilla-javascript-days-between-two-dates-3d1i
@@ -89,6 +97,3 @@ function formatDate(inputDate) {
 
     return `${date}.${month}.${year}`;
 }
-
-// TODO: Umstellen auf jQuery
-// TODO: preventDefault, gibt es eine Alternative?
