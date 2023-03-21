@@ -7,6 +7,14 @@
     <title>MyTours - Angebote</title>
     <link href="./CSS/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="./CSS/aenderungen.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="./IMG/logo.svg">
+
+    <script src="./JS/jquery.min.js"></script>
+    <script src="./JS/jquery.validate.min.js"></script>
+
+    <!--Quelle: https://mottie.github.io/tablesorter/docs/#Examples-->
+    <script type="text/javascript" src="./JS/jquery.tablesorter.js"></script>
+    <script type="text/javascript" src="./JS/jquery.tablesorter.widgets.js"></script>
 </head>
 
 <body>
@@ -120,16 +128,38 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped" id="trip-table">
+        <table class="table table-striped" class="tablesorter" id="trip-table">
             <thead>
                 <tr>
-                    <th scope="col">Kürzel</th>
-                    <th scope="col">Anz. Reisende</th>
-                    <th scope="col">Reiseziel</th>
-                    <th scope="col">Reisebeginn am:</th>
-                    <th scope="col">Rückreise am:</th>
-                    <th scope="col">Tage gesamt</th>
-                    <th scope="col">Gesamtpreis</th>
+                    <th scope="col">
+                        Kürzel
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Anz. Reisende
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Reiseziel
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Reisebeginn am:
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Rückreise am:
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Tage gesamt
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
+                    <th scope="col">Gesamtpreis
+                        <img src="./IMG/sort.png" alt="sort image" width="20" height="20"
+                            class="d-inline-block align-text-top">
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -137,8 +167,8 @@
                     <th scope="row">USLA</th>
                     <td>3</td>
                     <td>Los Angeles (USA)</td>
-                    <td>27.08.2023</td>
-                    <td>05.09.2023</td>
+                    <td>2023/08/27</td>
+                    <td>2023/08/05</td>
                     <td>9</td>
                     <td>2750,00€</td>
                 </tr>
@@ -146,8 +176,8 @@
                     <th scope="row">ITPA</th>
                     <td>2</td>
                     <td>Parma (Italien)</td>
-                    <td>21.05.2023</td>
-                    <td>30.05.2023</td>
+                    <td>2023/05/21</td>
+                    <td>2023/05/30</td>
                     <td>8</td>
                     <td>1570,00€</td>
                 </tr>
@@ -155,8 +185,8 @@
                     <th scope="row">CHPE</th>
                     <td>2</td>
                     <td>Peking (China)</td>
-                    <td>10.06.2023</td>
-                    <td>24.06.2023</td>
+                    <td>2023/06/10</td>
+                    <td>2023/06/24</td>
                     <td>13</td>
                     <td>2475,00€</td>
                 </tr>
@@ -164,8 +194,8 @@
                     <th scope="row">SAKP</th>
                     <td>1</td>
                     <td>Kapstadt (Südafrika)</td>
-                    <td>20.06.2023</td>
-                    <td>05.07.2023</td>
+                    <td>2023/06/20</td>
+                    <td>2023/07/05</td>
                     <td>14</td>
                     <td>2275,00€</td>
                 </tr>
@@ -173,8 +203,8 @@
                     <th scope="row">BRRI</th>
                     <td>3</td>
                     <td>Rio de Janeiro (Brasilien)</td>
-                    <td>29.07.2023</td>
-                    <td>11.08.2023</td>
+                    <td>2023/07/29</td>
+                    <td>2023/08/11</td>
                     <td>12</td>
                     <td>4150,00€</td>
                 </tr>
@@ -182,8 +212,8 @@
                     <th scope="row">CR13</th>
                     <td>2</td>
                     <td>Mittelmeer, Ärmelkanal, Nordsee</td>
-                    <td>26.05.2023</td>
-                    <td>01.06.2023</td>
+                    <td>2023/05/26</td>
+                    <td>2023/06/01</td>
                     <td>5</td>
                     <td>1200,00€</td>
                 </tr>
@@ -201,8 +231,6 @@
     </footer>
 
     <script src="./JS/bootstrap.bundle.min.js"></script>
-    <script src="./JS/jquery.min.js"></script>
-    <script src="./JS/jquery.validate.min.js"></script>
     <script src="./JS/trip-creation.js"></script>
 </body>
 

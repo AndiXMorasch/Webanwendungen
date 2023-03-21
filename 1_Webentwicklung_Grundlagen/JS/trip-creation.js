@@ -1,8 +1,12 @@
-let date = new Date();
 initDates();
+
+$(function () {
+    $("#trip-table").tablesorter();
+});
 
 // Init dates
 function initDates() {
+    let date = new Date();
     document.getElementById('trip-start-date').min = date.toLocaleDateString('fr-ca');
     document.getElementById('trip-start-date').valueAsDate = date;
 
@@ -63,12 +67,13 @@ function submitEntry() {
     // Get both dates to change their format
     var startDate = document.getElementById("trip-start-date").value;
     var endDate = document.getElementById("trip-end-date").value;
-    var startDateFormatted = new Date(startDate);
-    var endDateFormatted = new Date(endDate);
-    var difference = endDateFormatted.getTime() - startDateFormatted.getTime();
-    cell4.innerHTML = formatDate(startDateFormatted);
-    cell5.innerHTML = formatDate(endDateFormatted);
 
+    var startDateMillis = new Date(startDate);
+    var endDateMillis = new Date(endDate);
+    var difference = endDateMillis.getTime() - startDateMillis.getTime();
+
+    cell4.innerHTML = formatDate(startDateMillis);
+    cell5.innerHTML = formatDate(endDateMillis);
     cell6.innerHTML = daysBetween(difference);
     cell7.innerHTML = document.getElementById("trip-price").value + ",00€";
     event.preventDefault(); // TODO: preventDefault, gibt es eine Alternative?
@@ -95,5 +100,5 @@ function formatDate(inputDate) {
         .toString()
         .padStart(2, '0');
 
-    return `${date}.${month}.${year}`;
+    return `${year}/${month}/${date}`;
 }
