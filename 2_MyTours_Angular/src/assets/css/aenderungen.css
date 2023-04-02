@@ -1,0 +1,32 @@
+#carousel-main-menu h5 {
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 25px;
+  }
+  
+  #carousel-main-menu p {
+    text-shadow: 1px 1px black;
+    font-size: 15px;
+  }
+  
+  .row {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .row .page-header {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #typography {
+    font-style: bold;
+  }
+  
+  .error {
+    border: solid 2px #FF0000;
+  }
+
+  .card .text-muted {
+    color: red !important;
+  }
