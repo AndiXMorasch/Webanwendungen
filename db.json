@@ -1,8 +1,58 @@
 {
-  "posts": [
+  "trips": [
     {
-      "id": 1,
-      "title": "SEEERVUS"
+      "kuerzel": "USLA",
+      "reisende": 3,
+      "reiseziel": "Los Angeles (USA)",
+      "reiseantritt": "27/08/2023",
+      "reiseende": "05/09/2023",
+      "gesamttage": 9,
+      "gesamtpreis": "3250,00€"
+    },
+    {
+      "kuerzel": "ITPA",
+      "reisende": 2,
+      "reiseziel": "Parma (Italien)",
+      "reiseantritt": "21/05/2023",
+      "reiseende": "30/05/2023",
+      "gesamttage": 8,
+      "gesamtpreis": "1570,00€"
+    },
+    {
+      "kuerzel": "CHPE",
+      "reisende": 2,
+      "reiseziel": "Peking (China)",
+      "reiseantritt": "10/06/2023",
+      "reiseende": "24/06/2023",
+      "gesamttage": 13,
+      "gesamtpreis": "2455,00€"
+    },
+    {
+      "kuerzel": "SAKP",
+      "reisende": 1,
+      "reiseziel": "Kapstadt (Südafrika)",
+      "reiseantritt": "20/06/2023",
+      "reiseende": "05/07/2023",
+      "gesamttage": 14,
+      "gesamtpreis": "2275,00€"
+    },
+    {
+      "kuerzel": "BRRI",
+      "reisende": 3,
+      "reiseziel": "Rio de Janeiro (Brasilien)",
+      "reiseantritt": "29/07/2023",
+      "reiseende": "11/08/2023",
+      "gesamttage": 12,
+      "gesamtpreis": "4150,00€"
+    },
+    {
+      "kuerzel": "CR13",
+      "reisende": 2,
+      "reiseziel": "Kreuzfahrt 'Majesty'",
+      "reiseantritt": "26/05/2023",
+      "reiseende": "01/06/2023",
+      "gesamttage": 5,
+      "gesamtpreis": "1200,00€"
     }
   ],
   "profile": {
