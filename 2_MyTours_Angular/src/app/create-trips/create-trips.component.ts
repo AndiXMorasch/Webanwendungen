@@ -20,12 +20,12 @@ interface Post {
 })
 export class CreateTripsComponent {
   // Weitere TODO's:
+  // TODO: Gibt es eine Möglichkeit CreateTripsComponent noch weiter zu unterteilen? z.B. in verschiedene
+  // Klassen bzw. Services: TripValidation, TripCRUD, HttpTripService etc.
   // TODO: Abflugdatum und Ankunftsdatum initial befüllen
   // TODO: Reise Löschen Button, soll dann aktiv werden wenn das Kürzel eingebeben wurde
   // TODO: Datum darf nicht in der Vergangenheit liegen
   constructor(private datePipe: DatePipe, private http: HttpClient) {}
-
-  tripList = tripList;
 
   post: Post = {
     startDate: new Date(Date.now()),
@@ -60,6 +60,7 @@ export class CreateTripsComponent {
         gesamttage: this.differenceDays(),
         gesamtpreis: this.tripForm.get('gesamtpreis')?.value! + ',00€',
       };
+      this.saveTripListToLocalStorage();
     }
     // Wenn die Id nicht existiert -> anlegen
     else {
@@ -78,6 +79,7 @@ export class CreateTripsComponent {
         gesamttage: this.differenceDays(),
         gesamtpreis: this.tripForm.get('gesamtpreis')?.value! + ',00€',
       });
+      this.saveTripListToLocalStorage();
     }
   }
 
@@ -99,11 +101,13 @@ export class CreateTripsComponent {
 
   private idExists() {
     let exists = -1;
-    this.tripList.forEach((trip, index) => {
-      if (trip.kuerzel === this.tripForm.get('kuerzel')?.value) {
-        exists = index;
+    this.tripList.forEach(
+      (trip: { kuerzel: string | null | undefined }, index: number) => {
+        if (trip.kuerzel === this.tripForm.get('kuerzel')?.value) {
+          exists = index;
+        }
       }
-    });
+    );
     return exists;
   }
 
@@ -111,11 +115,14 @@ export class CreateTripsComponent {
   deleteTrip() {
     var kuerzel = this.tripForm.get('kuerzel')?.value;
     if (kuerzel) {
-      this.tripList.forEach((trip, index) => {
-        if (trip.kuerzel === kuerzel) {
-          this.tripList.splice(index, 1);
+      this.tripList.forEach(
+        (trip: { kuerzel: string | null | undefined }, index: any) => {
+          if (trip.kuerzel === kuerzel) {
+            this.tripList.splice(index, 1);
+            this.saveTripListToLocalStorage();
+          }
         }
-      });
+      );
     }
   }
 
@@ -142,8 +149,57 @@ export class CreateTripsComponent {
   get gesamtpreis() {
     return this.tripForm.get('gesamtpreis');
   }
+
+  private url =
+    'https://my-json-server.typicode.com/Convi57/Webanwendungen/trips';
+
+  getPosts() {
+    return this.http.get(this.url);
+  }
+
+  // tripList mit Daten aus der db.json befüllen
+  // und in den LocalStorage packen
+  tripList = this.getTripListFromLocalStorage();
+  tmp = this.checkTripListForNull();
+
+  private checkTripListForNull() {
+    if (!this.tripList) {
+      this.initTripList();
+    }
+  }
+
+  private initTripList() {
+    this.getPosts().subscribe((response) => {
+      this.tripList = response;
+      this.saveTripListToLocalStorage();
+    });
+  }
+
+  private saveTripListToLocalStorage() {
+    localStorage.setItem('tripList', JSON.stringify(this.tripList));
+  }
+
+  public getTripListFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('tripList')!);
+  }
+
+  public clearLocalStorage() {
+    localStorage.removeItem('tripList');
+    this.initTripList();
+  }
 }
 
+export class HttpTripListService {
+  constructor(private datePipe: DatePipe, private http: HttpClient) {}
+  private url =
+    'https://my-json-server.typicode.com/Convi57/Webanwendungen/trips';
+
+  public getPosts() {
+    return this.http.get(this.url);
+  }
+}
+
+/*
 export const tripList = [
   {
     kuerzel: 'USLA',
@@ -200,3 +256,4 @@ export const tripList = [
     gesamtpreis: '1200,00€',
   },
 ];
+*/

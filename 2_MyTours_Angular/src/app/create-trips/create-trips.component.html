@@ -157,7 +157,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let trip of tripList">
+                <tr *ngFor="let trip of getTripListFromLocalStorage()">
                     <td>{{trip.kuerzel}}</td>
                     <td>{{trip.reisende}}</td>
                     <td>{{trip.reiseziel}}</td>
@@ -168,6 +168,10 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="col d-flex justify-content-center">
+        <button (click)="clearLocalStorage()" class="btn btn-secondary">Angebote zurücksetzen</button>
     </div>
 
     <footer class="py-3 my-4">
