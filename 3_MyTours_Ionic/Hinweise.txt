@@ -1,0 +1,12 @@
+ionic generate service services/todo
+
+todos:any = [];
+constructor(public todoService:TodoService) { <= depencencyInjection
+this.todos = this.todoservice.todos;
+}
+
+// In dem Todo Service muss die gesamtliste vorhanden sein.
+// Diese kann dort auch modifiziert werden (CRUD)
+
+// wenn die seite neu geladen werden muss dann muss die entsprechende 
+liste returned werden statt nur im service angepasst
