@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { TripService } from '../services/trip.service';
 
 @Component({
   selector: 'app-tab3',
@@ -9,5 +10,5 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule],
 })
 export class Tab3Page {
-  constructor() { }
+  constructor() {}
 }
