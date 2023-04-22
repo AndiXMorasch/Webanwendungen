@@ -8,7 +8,12 @@ import { TripService } from '../services/trip.service';
   styleUrls: ['tab3.page.scss'],
   standalone: true,
   imports: [IonicModule],
+  providers: [TripService],
 })
 export class Tab3Page {
-  constructor() {}
+  constructor(private tripService: TripService) {}
+
+  public resetTripList() {
+    this.tripService.clearLocalStorage();
+  }
 }
