@@ -4,18 +4,24 @@ import { IonicModule } from '@ionic/angular';
 import { TripService } from '../services/trip.service';
 import { Injectable } from '@angular/core';
 import { IonModal } from '@ionic/angular';
-import { ModalController } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 import { ToastController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { FormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  Validators,
+  FormControl,
+  FormsModule,
+  FormBuilder,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
-  providers: [TripService],
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  providers: [TripService, DatePipe],
 })
 @Injectable()
 export class Tab2Page {
@@ -23,12 +29,11 @@ export class Tab2Page {
   modal!: IonModal;
   constructor(
     private tripService: TripService,
-    private modalCtrl: ModalController,
-    private toastController: ToastController
-  ) {}
+    private toastController: ToastController,
+    private datePipe: DatePipe
+  ) { }
 
   scopedTrip: any;
-  name: any;
 
   public getCurrentDate() {
     var todaysDateTmp = new Date();
@@ -51,16 +56,15 @@ export class Tab2Page {
   isModalCreationOpen = false;
   isModalInfoOpen = false;
 
-  kuerzelForCreation = null;
-  reisendeForCreation = null;
-  reisezielForCreation = null;
   reiseantrittForCreation = null;
   reiseendeForCreation = null;
-  gesamtpreisForCreation = null;
 
   setModificationOpenTrue(trip: any) {
     this.isModalModificationOpen = true;
     this.scopedTrip = trip;
+    console.log(this.scopedTrip.reiseantritt);
+    this.scopedTrip.reiseantritt = new Date(this.scopedTrip.reiseantritt).toISOString();
+    this.scopedTrip.reiseende = new Date(this.scopedTrip.reiseende).toISOString();
   }
 
   setModificationOpenFalse() {
@@ -86,28 +90,69 @@ export class Tab2Page {
 
   confirmCreation() {
     this.setCreationOpenFalse();
-    console.log(this.name);
-    this.modal.dismiss(this.name, 'confirm');
+    var kuerzelExists = this.tripService.idExists(
+      this.tripForm.get('kuerzel')?.value!
+    );
+
+    if (kuerzelExists == -1) {
+      var trip = {
+        kuerzel: this.tripForm.get('kuerzel')?.value!,
+        reisende: this.tripForm.get('reisende')?.value!,
+        reiseziel: this.tripForm.get('reiseziel')?.value!,
+        reiseantritt: this.datePipe.transform(
+          this.tripForm.get('reiseantritt')?.value,
+          'yyyy/MM/dd'
+        )!,
+        reiseende: this.datePipe.transform(
+          this.tripForm.get('reiseende')?.value,
+          'yyyy/MM/dd'
+        )!,
+        gesamttage: this.differenceDays(),
+        gesamtpreis: this.tripForm.get('gesamtpreis')?.value!,
+      };
+      this.tripService.addTrip(trip);
+    }
   }
 
+  private differenceDays() {
+    const reiseantritt = this.datePipe.transform(
+      this.tripForm.get('reiseantritt')?.value,
+      'MM/dd/yyyy'
+    );
+    const reiseende = this.datePipe.transform(
+      this.tripForm.get('reiseende')?.value,
+      'MM/dd/yyyy'
+    );
+
+    var reiseantrittDate = new Date(reiseantritt!);
+    var reiseendeDate = new Date(reiseende!);
+    var differenceMillis = reiseendeDate.getTime() - reiseantrittDate.getTime();
+    return differenceMillis / (1000 * 3600 * 24);
+  }
+
+  tripForm = new FormGroup({
+    kuerzel: new FormControl('', [Validators.required]),
+    reisende: new FormControl(1, [Validators.required, Validators.max(10)]),
+    reiseziel: new FormControl('', [Validators.required]),
+    reiseantritt: new FormControl('', [Validators.required]),
+    reiseende: new FormControl('', [Validators.required]),
+    gesamtpreis: new FormControl('', [
+      Validators.required,
+      Validators.max(10000),
+    ]),
+  });
+
   async deleteTrip(trip: any) {
-    var tripListTmp = this.tripService.getTripListFromLocalStorage();
-    var kuerzel = trip.kuerzel;
-    if (kuerzel) {
-      tripListTmp.forEach(
-        (trip: { kuerzel: string | null | undefined }, index: any) => {
-          if (trip.kuerzel === kuerzel) {
-            tripListTmp.splice(index, 1);
-            this.tripService.saveTripListToLocalStorage(tripListTmp);
-          }
-        }
-      );
-    }
+    this.tripService.deleteTrip(trip.kuerzel);
     const toast = await this.toastController.create({
-      message: 'Die Reise ' + kuerzel + ' wurde erfolgreich gelöscht.',
+      message: 'Die Reise ' + trip.kuerzel + ' wurde erfolgreich gelöscht.',
       duration: 2000,
       position: 'bottom',
     });
     await toast.present();
+  }
+
+  confirmModification() {
+    // TODO
   }
 }
