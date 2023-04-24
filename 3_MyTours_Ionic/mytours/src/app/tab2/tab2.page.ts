@@ -153,6 +153,6 @@ export class Tab2Page {
   }
 
   confirmModification() {
-    // TODO
+    // TODO: Änderungen speichern
   }
 }

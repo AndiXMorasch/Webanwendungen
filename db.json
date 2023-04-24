@@ -7,7 +7,7 @@
       "reiseantritt": "2023/08/27",
       "reiseende": "2023/09/05",
       "gesamttage": 9,
-      "gesamtpreis": "3250,00€"
+      "gesamtpreis": 3250
     },
     {
       "kuerzel": "ITPA",
@@ -16,7 +16,7 @@
       "reiseantritt": "2023/05/21",
       "reiseende": "2023/05/30",
       "gesamttage": 8,
-      "gesamtpreis": "1570,00€"
+      "gesamtpreis": 1570
     },
     {
       "kuerzel": "CHPE",
@@ -25,7 +25,7 @@
       "reiseantritt": "2023/06/10",
       "reiseende": "2023/06/24",
       "gesamttage": 13,
-      "gesamtpreis": "2455,00€"
+      "gesamtpreis": 2455
     },
     {
       "kuerzel": "SAKP",
@@ -34,7 +34,7 @@
       "reiseantritt": "2023/06/20",
       "reiseende": "2023/07/02",
       "gesamttage": 14,
-      "gesamtpreis": "2275,00€"
+      "gesamtpreis": 2275
     },
     {
       "kuerzel": "BRRI",
@@ -43,7 +43,7 @@
       "reiseantritt": "2023/07/29",
       "reiseende": "2023/08/11",
       "gesamttage": 12,
-      "gesamtpreis": "4150,00€"
+      "gesamtpreis": 4150
     },
     {
       "kuerzel": "CR13",
@@ -52,7 +52,7 @@
       "reiseantritt": "2023/05/26",
       "reiseende": "2023/06/02",
       "gesamttage": 5,
-      "gesamtpreis": "1200,00€"
+      "gesamtpreis": 1200
     }
   ],
   "profile": {
