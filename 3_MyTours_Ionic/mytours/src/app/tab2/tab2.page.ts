@@ -31,7 +31,7 @@ export class Tab2Page {
     private tripService: TripService,
     private toastController: ToastController,
     private datePipe: DatePipe
-  ) { }
+  ) {}
 
   scopedTrip: any;
 
@@ -55,6 +55,7 @@ export class Tab2Page {
   isModalModificationOpen = false;
   isModalCreationOpen = false;
   isModalInfoOpen = false;
+  isHelpOpen = false;
 
   reiseantrittForCreation = null;
   reiseendeForCreation = null;
@@ -62,9 +63,20 @@ export class Tab2Page {
   setModificationOpenTrue(trip: any) {
     this.isModalModificationOpen = true;
     this.scopedTrip = trip;
-    console.log(this.scopedTrip.reiseantritt);
-    this.scopedTrip.reiseantritt = new Date(this.scopedTrip.reiseantritt).toISOString();
-    this.scopedTrip.reiseende = new Date(this.scopedTrip.reiseende).toISOString();
+
+    // Wieso wird mir hier bei der Ausgabe im datetime jeweils immer ein Tag abgezogen? Liegt das an einer anderen Zeitzone?
+    var reiseantrittDate = new Date(this.scopedTrip.reiseantritt);
+    this.scopedTrip.reiseantritt = new Date(
+      reiseantrittDate.getFullYear(),
+      reiseantrittDate.getMonth(),
+      reiseantrittDate.getDate() + 1
+    ).toISOString();
+    var reiseendeDate = new Date(this.scopedTrip.reiseende);
+    this.scopedTrip.reiseende = new Date(
+      reiseendeDate.getFullYear(),
+      reiseendeDate.getMonth(),
+      reiseendeDate.getDate() + 1
+    ).toISOString();
   }
 
   setModificationOpenFalse() {
@@ -88,30 +100,34 @@ export class Tab2Page {
     this.isModalInfoOpen = false;
   }
 
+  setHelpOpenTrue() {
+    this.isHelpOpen = true;
+  }
+
+  setHelpOpenFalse() {
+    this.isHelpOpen = false;
+  }
+
   confirmCreation() {
     this.setCreationOpenFalse();
-    var kuerzelExists = this.tripService.idExists(
-      this.tripForm.get('kuerzel')?.value!
-    );
 
-    if (kuerzelExists == -1) {
-      var trip = {
-        kuerzel: this.tripForm.get('kuerzel')?.value!,
-        reisende: this.tripForm.get('reisende')?.value!,
-        reiseziel: this.tripForm.get('reiseziel')?.value!,
-        reiseantritt: this.datePipe.transform(
-          this.tripForm.get('reiseantritt')?.value,
-          'yyyy/MM/dd'
-        )!,
-        reiseende: this.datePipe.transform(
-          this.tripForm.get('reiseende')?.value,
-          'yyyy/MM/dd'
-        )!,
-        gesamttage: this.differenceDays(),
-        gesamtpreis: this.tripForm.get('gesamtpreis')?.value!,
-      };
-      this.tripService.addTrip(trip);
-    }
+    var trip = {
+      kuerzel: this.tripForm.get('kuerzel')?.value!,
+      reisende: this.tripForm.get('reisende')?.value!,
+      reiseziel: this.tripForm.get('reiseziel')?.value!,
+      reiseantritt: this.datePipe.transform(
+        this.tripForm.get('reiseantritt')?.value,
+        'yyyy/MM/dd'
+      )!,
+      reiseende: this.datePipe.transform(
+        this.tripForm.get('reiseende')?.value,
+        'yyyy/MM/dd'
+      )!,
+      gesamttage: this.differenceDays(),
+      gesamtpreis: this.tripForm.get('gesamtpreis')?.value!,
+    };
+    this.tripService.addTrip(trip);
+    this.informAboutChange(trip.kuerzel, 'create');
   }
 
   private differenceDays() {
@@ -142,17 +158,47 @@ export class Tab2Page {
     ]),
   });
 
+  confirmModification() {
+    this.setModificationOpenFalse();
+    var trip = {
+      kuerzel: this.tripForm.get('kuerzel')?.value!,
+      reisende: this.tripForm.get('reisende')?.value!,
+      reiseziel: this.tripForm.get('reiseziel')?.value!,
+      reiseantritt: this.datePipe.transform(
+        this.tripForm.get('reiseantritt')?.value,
+        'yyyy/MM/dd'
+      )!,
+      reiseende: this.datePipe.transform(
+        this.tripForm.get('reiseende')?.value,
+        'yyyy/MM/dd'
+      )!,
+      gesamttage: this.differenceDays(),
+      gesamtpreis: this.tripForm.get('gesamtpreis')?.value!,
+    };
+    this.tripService.modifyTrip(trip);
+    this.informAboutChange(trip.kuerzel, 'modify');
+  }
+
   async deleteTrip(trip: any) {
     this.tripService.deleteTrip(trip.kuerzel);
+    this.informAboutChange(trip.kuerzel, 'delete');
+  }
+
+  async informAboutChange(kuerzel: any, type: string) {
+    var changeType;
+    if (type == 'create') {
+      changeType = 'hinzugefügt.';
+    } else if (type == 'modify') {
+      changeType = 'geändert.';
+    } else if (type == 'delete') {
+      changeType = 'gelöscht.';
+    }
+
     const toast = await this.toastController.create({
-      message: 'Die Reise ' + trip.kuerzel + ' wurde erfolgreich gelöscht.',
+      message: 'Die Reise ' + kuerzel + ' wurde ' + changeType,
       duration: 2000,
       position: 'bottom',
     });
     await toast.present();
-  }
-
-  confirmModification() {
-    // TODO: Änderungen speichern
   }
 }

@@ -1,8 +1,21 @@
 <ion-header [translucent]="true">
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
   <ion-toolbar>
     <ion-title>
+      <ion-icon src="assets/plane.svg" style="margin-right: 10px;"></ion-icon>
       Trips
     </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)="setHelpOpenTrue()">
+        <ion-icon slot="icon-only" name="help-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="setCreationOpenTrue()" fill="clear">
         <ion-icon name="add"></ion-icon>
@@ -13,21 +26,36 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let trip of getCurrentTripList()">
+  <ion-card>
+    <img alt="Image of a caribbean vacation place" src="assets/travel-stock-image.jpg" />
+    <ion-card-header>
+      <ion-card-title style="text-align: center; font-family: Raleway; font-weight: bold;">
+        Reisen verwalten
+      </ion-card-title>
+      <ion-card-subtitle>
+        <p>In diesem Abschnitt können Sie Reisen mit wenigen Klicks und ganz einfach
+          verwalten. Sie finden oben rechts
+          unter dem Fragezeichen weitere Hilfestellungen zu Ihren Fragen. Falls Sie wünschen die Liste zurückzusetzen,
+          können Sie dies in den Einstellungen tun.</p>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-list [inset]="true">
+    <ion-item-sliding *ngFor=" let trip of getCurrentTripList()">
       <ion-item button detail="false" expand="block" (click)="setInfoOpenTrue(trip)">
         <ion-label>
           <h3>{{trip.kuerzel}}</h3>
           <p>{{trip.reiseziel}}</p>
-          <p>Gesamtpreis: {{trip.gesamtpreis}}</p>
+          <p>Gesamtpreis: {{trip.gesamtpreis + ",00€"}}</p>
         </ion-label>
       </ion-item>
 
       <ion-item-options>
-        <ion-item-option (click)="setModificationOpenTrue(trip)">Edit
+        <ion-item-option (click)="setModificationOpenTrue(trip)">Bearbeiten
           <ion-icon slot="icon-only" name="pencil"></ion-icon>
         </ion-item-option>
-        <ion-item-option (click)="deleteTrip(trip)" color="danger">Delete
+        <ion-item-option (click)="deleteTrip(trip)" color="danger">Löschen
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-item-option>
       </ion-item-options>
@@ -126,7 +154,7 @@
           </ion-item>
           <ion-item>
             <ion-label>Gesamtpreis:</ion-label>
-            <ion-label>{{scopedTrip.gesamtpreis}}</ion-label>
+            <ion-label>{{scopedTrip.gesamtpreis + ",00€"}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>
@@ -180,6 +208,56 @@
               labelPlacement="floating" placeholder="Gesamtpreis (max. 10.000€)"></ion-input>
           </ion-item>
         </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isHelpOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>FAQ</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setHelpOpenFalse()">Schließen</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header">
+              <ion-label>Wie kann ich mir Details zu einer Reise anzeigen lassen?</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              Klicken Sie dafür einfach auf eine Reise in der Liste.
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header">
+              <ion-label>Wie kann ich eine Reise bearbeiten?</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              Ziehen Sie dafür die jeweilige Reise nach Links. Es erscheint die Option die Reise zu bearbeiten.
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header">
+              <ion-label>Wie kann ich eine Reise löschen?</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              Ziehen Sie dafür die jeweilige Reise nach Links. Es erscheint die Option die Reise zu löschen.
+            </div>
+          </ion-accordion>
+          <ion-accordion value="fourth">
+            <ion-item slot="header">
+              <ion-label>Wie kann ich die Liste zurücksetzen?</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              Die Liste können Sie zurücksetzen indem Sie zu den Einstellungen navigieren und dort die Reisen
+              zurücksetzen. Bitte beachten Sie dabei, dass alle Ihre Änderungen verloren gehen.
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
       </ion-content>
     </ng-template>
   </ion-modal>

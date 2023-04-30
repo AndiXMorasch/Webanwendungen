@@ -1,15 +1,89 @@
 <ion-header [translucent]="true">
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
   <ion-toolbar>
     <ion-title>
+      <ion-icon src="assets/icon/favicon.svg" style="margin-right: 10px;"></ion-icon>
       Home
     </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-row class="ion-justify-content-center">
+    <ion-text color="#000000">
+      <h1 style="font-weight: bold; font-family: Raleway; font-size: xx-large;">Willkommen bei MyTours!</h1>
+    </ion-text>
+  </ion-row>
+
+  <ion-card button>
+    <img alt="Image of a caribbean vacation place" src="assets/caribbean.jpg" />
+    <ion-card-header>
+      <ion-card-title>Karibikurlaub</ion-card-title>
+      <ion-card-subtitle>Tropische Orte mit Palmen am Meer? Wir haben
+        da was für Sie.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Erleben Sie das Paradies auf Erden mit unserer unvergesslichen tropischen Karibikreise! Entdecken Sie die
+      atemberaubenden Strände, das kristallklare Wasser und die warme Sonne, die das ganze Jahr über scheint. Lassen Sie
+      sich von den pulsierenden Rhythmen der karibischen Musik mitreißen und kosten Sie die köstlichen lokalen Gerichte.
+      Unser erfahrenes Reiseteam sorgt dafür, dass Ihre Reise reibungslos und angenehm verläuft. Wir kümmern uns um alle
+      Details, von der Buchung Ihres Fluges und Ihrer Unterkunft bis hin zu Ihrer Freizeitgestaltung während Ihres
+      Aufenthalts.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card button>
+    <img alt="Image of a caribbean vacation place" src="assets/city.jpg" />
+    <ion-card-header>
+      <ion-card-title>Städtetrips</ion-card-title>
+      <ion-card-subtitle>Erkunden Sie die schönsten Städte innerhalb und außerhalb
+        Europas.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Entdecken Sie die Schönheit einer pulsierenden Stadt und lassen Sie sich von ihrer Energie und ihrem Charme
+      verzaubern. Unser Städtetrip-Paket bietet die perfekte Gelegenheit, um eine aufregende und unvergessliche Reise zu
+      erleben. Unser Reisepaket umfasst alle notwendigen Details, von der Buchung Ihres Fluges und Ihrer Unterkunft bis
+      hin zur Organisation von Stadtführungen und Aktivitäten. Wir stellen sicher, dass Sie Ihre Zeit in der Stadt
+      optimal nutzen und das Beste aus Ihrem Städtetrip herausholen.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card button>
+    <img alt="Image of a caribbean vacation place" src="assets/egypt.jpg" />
+    <ion-card-header>
+      <ion-card-title>Ferner Osten und Afrika</ion-card-title>
+      <ion-card-subtitle>Pyramiden, Safaris und uralte Landschaften - Afrika heißt Sie
+        willkommen.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Entdecken Sie die Wunder des fernen Ostens und tauchen Sie in eine faszinierende Kultur ein, die Geschichte,
+      Schönheit und Gastfreundschaft vereint. Unsere Fernost-Reisepakete bieten die perfekte Gelegenheit, um eine
+      unvergessliche Reise zu erleben. Erkunden Sie die alten Tempel, Gärten und Schreine, die Sie in eine andere Welt
+      entführen werden. Kosten Sie die köstlichen lokalen Gerichte und erleben Sie die Vielfalt und den Reichtum der
+      fernen ostasiatischen Küche.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card button>
+    <img alt="Image of a caribbean vacation place" src="assets/cruise.jpg" />
+    <ion-card-header>
+      <ion-card-title>Karibikurlaub</ion-card-title>
+      <ion-card-subtitle>Bitte einsteigen - Wir setzen die Segel.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Genießen Sie die atemberaubende Aussicht auf das Meer und die Küstenlinien und lassen Sie sich von der
+      erstklassigen Ausstattung und dem Komfort unserer Kreuzfahrtschiffe verwöhnen. Entdecken Sie aufregende
+      Reiseziele, besuchen Sie exotische Länder und erleben Sie verschiedene Kulturen und Traditionen.
+      Unsere erfahrenen Reiseleiter und Animateure sorgen dafür, dass Sie alle Höhepunkte der besuchten Orte entdecken
+      und die besten Aktivitäten erleben, die auf und abseits des Schiffes angeboten werden.
+    </ion-card-content>
+  </ion-card>
 </ion-content>

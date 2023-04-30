@@ -1,8 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
+      <ion-icon src="assets/gear.svg" style="margin-right: 10px;"></ion-icon>
       Settings
     </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        Help
+        <ion-icon slot="end" name="help-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +17,7 @@
 
   <ion-grid style="height: 100%">
     <ion-row class="ion-justify-content-center">
-      <p>Tabelle auf ursprüngliche Daten zurücksetzen.</p>
+      <p>Reisen auf ursprüngliche Daten zurücksetzen.</p>
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-button (click)="resetTripList()">

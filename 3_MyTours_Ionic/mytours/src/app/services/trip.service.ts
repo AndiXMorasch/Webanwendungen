@@ -42,18 +42,20 @@ export class TripService implements OnInit {
   }
 
   public addTrip(trip: any) {
-    this.tripList.push({
-      kuerzel: trip.kuerzel,
-      reisende: trip.reisende,
-      reiseziel: trip.reiseziel,
-      reiseantritt: trip.reiseantritt,
-      reiseende: trip.reiseende,
-      gesamttage: trip.gesamttage,
-      gesamtpreis: trip.gesamtpreis,
-    });
+    if (this.idExists(trip.kuerzel) == -1) {
+      this.tripList.push({
+        kuerzel: trip.kuerzel,
+        reisende: trip.reisende,
+        reiseziel: trip.reiseziel,
+        reiseantritt: trip.reiseantritt,
+        reiseende: trip.reiseende,
+        gesamttage: trip.gesamttage,
+        gesamtpreis: trip.gesamtpreis,
+      });
 
-    this.saveTripListToLocalStorage();
-    console.log(this.tripList);
+      this.saveTripListToLocalStorage();
+      console.log(this.tripList);
+    }
   }
 
   public idExists(kuerzel: string) {
@@ -66,6 +68,25 @@ export class TripService implements OnInit {
       }
     );
     return exists;
+  }
+
+  public modifyTrip(trip: any) {
+    if (this.idExists(trip.kuerzel) != -1) {
+      this.tripList.forEach(
+        (t: { kuerzel: string | null | undefined }, index: any) => {
+          if (t.kuerzel === trip.kuerzel) {
+            this.tripList[index].kuerzel = trip.kuerzel;
+            this.tripList[index].reisende = trip.reisende;
+            this.tripList[index].reiseziel = trip.reiseziel;
+            this.tripList[index].reiseantritt = trip.reiseantritt;
+            this.tripList[index].reiseende = trip.reiseende;
+            this.tripList[index].gesamttage = trip.gesamttage;
+            this.tripList[index].gesamtpreis = trip.gesamtpreis;
+            this.saveTripListToLocalStorage();
+          }
+        }
+      );
+    }
   }
 
   public deleteTrip(id: string) {
