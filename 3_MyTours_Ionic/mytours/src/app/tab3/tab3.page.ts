@@ -14,6 +14,6 @@ export class Tab3Page {
   constructor(private tripService: TripService) {}
 
   public resetTripList() {
-    this.tripService.clearLocalStorage();
+    this.tripService.resetLocalStorage();
   }
 }

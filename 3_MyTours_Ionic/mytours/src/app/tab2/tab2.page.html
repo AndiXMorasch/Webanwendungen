@@ -42,7 +42,7 @@
   </ion-card>
 
   <ion-list [inset]="true">
-    <ion-item-sliding *ngFor=" let trip of getCurrentTripList()">
+    <ion-item-sliding *ngFor=" let trip of this.getCurrentTripList()">
       <ion-item button detail="false" expand="block" (click)="setInfoOpenTrue(trip)">
         <ion-label>
           <h3>{{trip.kuerzel}}</h3>

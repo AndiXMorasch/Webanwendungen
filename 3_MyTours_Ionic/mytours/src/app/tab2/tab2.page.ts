@@ -11,7 +11,6 @@ import {
   Validators,
   FormControl,
   FormsModule,
-  FormBuilder,
   ReactiveFormsModule,
 } from '@angular/forms';
 
@@ -34,6 +33,11 @@ export class Tab2Page {
   ) {}
 
   scopedTrip: any;
+  scopedKuerzel: any;
+
+  public getCurrentTripList() {
+    return this.tripService.getCurrentTripList();
+  }
 
   public getCurrentDate() {
     var todaysDateTmp = new Date();
@@ -48,10 +52,6 @@ export class Tab2Page {
     return num.toString().padStart(2, '0');
   }
 
-  public getCurrentTripList() {
-    return this.tripService.getTripListFromLocalStorage();
-  }
-
   isModalModificationOpen = false;
   isModalCreationOpen = false;
   isModalInfoOpen = false;
@@ -63,6 +63,7 @@ export class Tab2Page {
   setModificationOpenTrue(trip: any) {
     this.isModalModificationOpen = true;
     this.scopedTrip = trip;
+    this.scopedKuerzel = trip.kuerzel;
 
     // Wieso wird mir hier bei der Ausgabe im datetime jeweils immer ein Tag abgezogen? Liegt das an einer anderen Zeitzone?
     var reiseantrittDate = new Date(this.scopedTrip.reiseantritt);
@@ -159,7 +160,6 @@ export class Tab2Page {
   });
 
   confirmModification() {
-    this.setModificationOpenFalse();
     var trip = {
       kuerzel: this.tripForm.get('kuerzel')?.value!,
       reisende: this.tripForm.get('reisende')?.value!,
@@ -175,8 +175,10 @@ export class Tab2Page {
       gesamttage: this.differenceDays(),
       gesamtpreis: this.tripForm.get('gesamtpreis')?.value!,
     };
-    this.tripService.modifyTrip(trip);
+
+    this.tripService.modifyTrip(trip, this.scopedKuerzel);
     this.informAboutChange(trip.kuerzel, 'modify');
+    this.setModificationOpenFalse();
   }
 
   async deleteTrip(trip: any) {

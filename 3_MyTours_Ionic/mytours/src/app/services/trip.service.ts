@@ -1,49 +1,52 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TripService implements OnInit {
+export class TripService {
   constructor(private http: HttpClient) {}
 
   private url =
     'https://my-json-server.typicode.com/Convi57/Webanwendungen/trips';
-  tripList: any = this.getTripListFromLocalStorage();
+  tmp: any = this.fillTripList();
 
-  ngOnInit(): void {
-    if (!this.tripList) {
+  fillTripList(): void {
+    // Falls leer, initial befüllen
+    if (!this.getCurrentTripList()) {
       this.initTripList();
     }
   }
 
-  public getTripListFromLocalStorage() {
+  // TripList aus dem LocalStorage holen
+  public getCurrentTripList() {
     return JSON.parse(localStorage.getItem('tripList')!);
   }
 
+  // TripList mit Daten aus der JSON-DB initialisieren
   private initTripList() {
-    this.getPosts().subscribe((response) => {
-      this.tripList = response;
-      this.saveTripListToLocalStorage();
+    this.http.get(this.url).subscribe((response) => {
+      this.saveTripListToLocalStorage(response);
     });
   }
 
-  public clearLocalStorage() {
-    localStorage.removeItem('tripList');
+  // Local Storage zurücksetzen
+  public resetLocalStorage() {
+    localStorage.clear();
     this.initTripList();
   }
 
-  private getPosts() {
-    return this.http.get(this.url);
+  // TripList zum im LocalStorage speichern
+  public saveTripListToLocalStorage(tripList: any) {
+    localStorage.clear();
+    localStorage.setItem('tripList', JSON.stringify(tripList));
   }
 
-  public saveTripListToLocalStorage() {
-    localStorage.setItem('tripList', JSON.stringify(this.tripList));
-  }
-
+  // Reise hinzufügen
   public addTrip(trip: any) {
     if (this.idExists(trip.kuerzel) == -1) {
-      this.tripList.push({
+      var tripList = this.getCurrentTripList();
+      tripList.push({
         kuerzel: trip.kuerzel,
         reisende: trip.reisende,
         reiseziel: trip.reiseziel,
@@ -53,14 +56,18 @@ export class TripService implements OnInit {
         gesamtpreis: trip.gesamtpreis,
       });
 
-      this.saveTripListToLocalStorage();
-      console.log(this.tripList);
+      this.saveTripListToLocalStorage(tripList);
+      console.log(tripList);
+    } else {
+      console.log(
+        'Reise kann nicht hinzugefügt werden, das Kürzel existiert bereits.'
+      );
     }
   }
 
-  public idExists(kuerzel: string) {
+  private idExists(kuerzel: string) {
     let exists = -1;
-    this.tripList.forEach(
+    this.getCurrentTripList().forEach(
       (trip: { kuerzel: string | null | undefined }, index: number) => {
         if (trip.kuerzel === kuerzel) {
           exists = index;
@@ -70,35 +77,43 @@ export class TripService implements OnInit {
     return exists;
   }
 
-  public modifyTrip(trip: any) {
-    if (this.idExists(trip.kuerzel) != -1) {
-      this.tripList.forEach(
+  // Reise ändern
+  public modifyTrip(trip: any, id: string) {
+    if (this.idExists(id) != -1) {
+      var tripList = this.getCurrentTripList();
+      tripList.forEach(
         (t: { kuerzel: string | null | undefined }, index: any) => {
-          if (t.kuerzel === trip.kuerzel) {
-            this.tripList[index].kuerzel = trip.kuerzel;
-            this.tripList[index].reisende = trip.reisende;
-            this.tripList[index].reiseziel = trip.reiseziel;
-            this.tripList[index].reiseantritt = trip.reiseantritt;
-            this.tripList[index].reiseende = trip.reiseende;
-            this.tripList[index].gesamttage = trip.gesamttage;
-            this.tripList[index].gesamtpreis = trip.gesamtpreis;
-            this.saveTripListToLocalStorage();
+          if (t.kuerzel === id) {
+            tripList[index].kuerzel = trip.kuerzel;
+            tripList[index].reisende = trip.reisende;
+            tripList[index].reiseziel = trip.reiseziel;
+            tripList[index].reiseantritt = trip.reiseantritt;
+            tripList[index].reiseende = trip.reiseende;
+            tripList[index].gesamttage = trip.gesamttage;
+            tripList[index].gesamtpreis = trip.gesamtpreis;
+            this.saveTripListToLocalStorage(tripList);
           }
         }
       );
+    } else {
+      console.log('Keine Reise mit der ID ' + id + ' gefunden.');
     }
   }
 
+  // Reise löschen
   public deleteTrip(id: string) {
     if (this.idExists(id) != -1) {
-      this.tripList.forEach(
+      var tripList = this.getCurrentTripList();
+      tripList.forEach(
         (trip: { kuerzel: string | null | undefined }, index: any) => {
           if (trip.kuerzel === id) {
-            this.tripList.splice(index, 1);
-            this.saveTripListToLocalStorage();
+            tripList.splice(index, 1);
+            this.saveTripListToLocalStorage(tripList);
           }
         }
       );
+    } else {
+      console.log('Keine Reise mit der ID ' + id + ' gefunden.');
     }
   }
 }
