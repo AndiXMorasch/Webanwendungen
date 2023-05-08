@@ -1,0 +1,27 @@
+- neue ionic app mit tabs erstellen
+- per npm -> npm i @angular/fire --force Firebase Framework für Angular installieren
+- Dependencies einbinden: app.module.ts -> (siehe Foto)
+
+- chats laden: chats: Observable<any[]>;
+
+- constructor(private firestore:Firestore) {
+const col = collection(firestore, 'room_0');
+const q = query(coll, orderBy('timestamp', 'desc'));
+this.chats = collectionData(q);
+}
+
+- in der html muss hinter chats | async stehen
+
+_____________________________________________________
+
+Nachricht versenden:
+
+async addMessage()
+{
+await addDoc(Collection(this.firestore, 'room_0'), {
+'author': 'bla'
+'text': 'bla'
+'timestamp': serverTimestamp()
+})
+}
+
