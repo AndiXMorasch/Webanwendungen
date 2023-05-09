@@ -8,8 +8,24 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let message of chats | async">
-      <h3>{{message.author}}</h3>
-    </ion-item>
+    <ion-card *ngFor="let message of chats | async">
+      <ion-card-header>
+        <ion-card-title>{{message.author}}</ion-card-title>
+        <ion-card-subtitle>{{message.text}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Lade neue Nachrichten"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-textarea slot="start" [(ngModel)]="text" fill="outline" placeholder="Nachricht eingeben" [autoGrow]="true">
+    </ion-textarea>
+    <ion-button fill="solid" slot="end" shape="circle" (click)="sendMessage()">
+      <ion-icon slot="icon-only" name="send-sharp"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
