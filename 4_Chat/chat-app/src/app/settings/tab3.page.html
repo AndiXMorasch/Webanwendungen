@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Settings
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+
+  <ion-input label="Nutzername" [(ngModel)]="username" label-placement="floating" fill="outline"
+    placeholder="Neuer Nutzername"></ion-input>
+  <div class="actions">
+    <ion-button (click)="setNewUsername()">
+      Speichern
+    </ion-button>
+  </div>
+
+</ion-content>
