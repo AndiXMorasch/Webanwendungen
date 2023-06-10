@@ -11,10 +11,10 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{url('ships')}}">Schiffe</a>
+                            <a class="nav-link" href="{{url('ships')}}">Schiffe</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('shipmodels')}}">Modelle</a>
+                            <a class="nav-link active" aria-current="page" href="{{url('shipmodels')}}">Modelle</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('manufacturers')}}">Hersteller</a>
@@ -24,26 +24,14 @@
             </div>
         </nav>
 
-        <h1>Schiff hinzufügen</h1>
+        <h1>Modell hinzufügen</h1>
         @include('snippets.error')
 
-        {!! Form::open(['url' => 'ships/save']) !!}
-            {!! Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Schiffsname...']) !!}
-            <br/>
-            {!! Form::text('brt', null, ['class'=>'form-control', 'placeholder'=>'BRT...']) !!}
-            <br/>
-            {!! Form::text('length', null, ['class'=>'form-control', 'placeholder'=>'Length...']) !!}
-            <br/>
-            {!! Form::text('width', null, ['class'=>'form-control', 'placeholder'=>'Width...']) !!}
-            <br/>
-            {!! Form::text('height', null, ['class'=>'form-control', 'placeholder'=>'Height...']) !!}
-            <br/>
-            {!! Form::text('color', null, ['class'=>'form-control', 'placeholder'=>'Color...']) !!}
-            <br/>
-            {!! Form::text('seats', null, ['class'=>'form-control', 'placeholder'=>'Seats...']) !!}
+        {!! Form::open(['url' => 'shipmodels/save']) !!}
+            {!! Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'Name Schiffsmodell...']) !!}
             <br/>
             {!! Form::submit('Speichern', ['class'=>'btn btn-success']) !!}
-            <a href="{{url('ships')}}" class="btn btn-danger">Abbrechen</a>
+            <a href="{{url('shipmodels')}}" class="btn btn-danger">Abbrechen</a>
 
         {!! Form::close() !!}
 @endsection

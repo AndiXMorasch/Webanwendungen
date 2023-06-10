@@ -11,7 +11,11 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('ships', function (Blueprint $table) {
-            $table->string('length');
+            $table->integer('length')->default(0);
+            $table->integer('width')->default(0);
+            $table->integer('height')->default(0);
+            $table->string('color')->default("");
+            $table->integer('seats')->default(0);
         });
     }
 
@@ -22,6 +26,10 @@ return new class extends Migration {
     {
         Schema::table('ships', function (Blueprint $table) {
             $table->dropColumn('length');
+            $table->dropColumn('width');
+            $table->dropColumn('height');
+            $table->dropColumn('color');
+            $table->dropColumn('seats');
         });
     }
 };
